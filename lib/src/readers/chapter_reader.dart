@@ -125,8 +125,13 @@ class ChapterReader {
     anchor = splitResult.item2;
     EpubTextContentFileRef? htmlContentFileRef;
     if (!bookRef.Content!.Html!.containsKey(contentFileName)) {
-      throw Exception(
-          'Incorrect EPUB manifest: item with href = \"$contentFileName\" is missing.');
+      contentFileName = contentFileName.startsWith('/')
+          ? contentFileName.substring(1)
+          : contentFileName;
+      if (!bookRef.Content!.Html!.containsKey(contentFileName)) {
+        throw Exception(
+            'Incorrect EPUB manifest: item with href = \"$contentFileName\" is missing.');
+      }
     }
 
     htmlContentFileRef = bookRef.Content!.Html![contentFileName];
