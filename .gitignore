@@ -29,3 +29,6 @@ pubspec.lock
 
 #Ignore VSCode Directory
 .vscode/
+
+# FVM Version Cache
+.fvm/
